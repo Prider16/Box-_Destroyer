@@ -49,12 +49,16 @@ class BOX_DESTROYER_API AMainCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* SprintAction;
 
+	/** Sprint Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ShootAction;
+
 	/*Variables*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Variables, meta = (AllowPrivateAccess = "true"))
 	bool isSprint;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Variables, meta = (AllowPrivateAccess = "true"))
-	bool isJump;
+	bool isJump;	
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Weapons, meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<ABaseWeapon> RifleBlueprint;
@@ -81,6 +85,10 @@ protected:
 	/** Called for Sprint input */
 	void StartSprint(const FInputActionValue& Value);
 	void StopSprint(const FInputActionValue& Value);
+
+	/* Called for Shoot input*/
+	void Shoot(const FInputActionValue& Value);
+	void ShootStop(const FInputActionValue& Value);
 
 	/*Spawn the rifle*/
 	void SpawnRifle();

@@ -19,6 +19,9 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Variables)
+	bool Firing = false;
+
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 

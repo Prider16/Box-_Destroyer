@@ -86,6 +86,11 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		// Sprinting
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AMainCharacter::StartSprint);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &AMainCharacter::StopSprint);
+		
+		// Shooting
+		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Started, this, &AMainCharacter::Shoot);
+		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Completed, this, &AMainCharacter::ShootStop);
+
 	}
 }
 
@@ -145,6 +150,16 @@ void AMainCharacter::StopSprint(const FInputActionValue& Value)
 {
 	isSprint = false;
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+}
+
+void AMainCharacter::Shoot(const FInputActionValue& Value)
+{
+	RifleRefrence->Fire();
+}
+
+void AMainCharacter::ShootStop(const FInputActionValue& Value)
+{
+	RifleRefrence->Firing = false;
 }
 
 void AMainCharacter::SpawnRifle()

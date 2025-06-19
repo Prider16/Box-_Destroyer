@@ -3,6 +3,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "DrawDebugHelpers.h"
+#include "Character/MainCharacter.h"
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()
@@ -25,6 +26,7 @@ void ABaseWeapon::Tick(float DeltaTime)
 
 void ABaseWeapon::Fire()
 {
+	Firing = true;
 	if (CurrentAmmo <= 0)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Out of Ammo!"));
@@ -33,7 +35,9 @@ void ABaseWeapon::Fire()
 
 	CurrentAmmo--;
 
-	PerformLineTrace();
+	UE_LOG(LogTemp, Log, TEXT("Current. Ammo: %d"), CurrentAmmo);
+
+	ABaseWeapon::PerformLineTrace();
 }
 
 void ABaseWeapon::Reload()
