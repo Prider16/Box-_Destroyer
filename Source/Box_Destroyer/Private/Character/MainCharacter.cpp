@@ -50,8 +50,8 @@ void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Spawning Rifle at the start
 	AMainCharacter::SpawnRifle();
-
 }
 
 void AMainCharacter::NotifyControllerChanged()
@@ -89,7 +89,9 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		
 		// Shooting
 		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Started, this, &AMainCharacter::Shoot);
-		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Completed, this, &AMainCharacter::ShootStop);
+
+		// Reload
+		EnhancedInputComponent->BindAction(ReloadAction, ETriggerEvent::Started, this, &AMainCharacter::Reload);
 
 	}
 }
@@ -130,36 +132,30 @@ void AMainCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-void AMainCharacter::Jump(const FInputActionValue& Value)
-{
-	ACharacter::Jump();
-}
-
-void AMainCharacter::StopJump(const FInputActionValue& Value)
-{
-	ACharacter::StopJumping();
-}
-
 void AMainCharacter::StartSprint(const FInputActionValue& Value)
 {
+	// Changing speed for Sprinting
 	isSprint = true;
 	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
 }
 
 void AMainCharacter::StopSprint(const FInputActionValue& Value)
 {
+	// Setting Speed Back to normal after Sprint
 	isSprint = false;
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 }
 
 void AMainCharacter::Shoot(const FInputActionValue& Value)
 {
+	// Calling Fire Function from Rifle
 	RifleRefrence->Fire();
 }
 
-void AMainCharacter::ShootStop(const FInputActionValue& Value)
+void AMainCharacter::Reload(const FInputActionValue& Value)
 {
-	RifleRefrence->Firing = false;
+	// Calling Reload Function from Rifle
+	RifleRefrence->Reload();
 }
 
 void AMainCharacter::SpawnRifle()
@@ -172,12 +168,13 @@ void AMainCharacter::SpawnRifle()
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	
-	// Spawning the Pistol in the scene
+	// Spawning the Rifle in the scene
 	ABaseWeapon* SpawnedRifle = World->SpawnActor<ABaseWeapon>(RifleBlueprint, GetActorTransform(), SpawnParams);
 
+	// Creating a Rifle Refrence for furthur use
 	RifleRefrence = SpawnedRifle;
 
-	// if the pistol is spawned...
+	// if the Rifle is spawned...
 	if (SpawnedRifle)
 	{
 		FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);

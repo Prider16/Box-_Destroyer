@@ -3,7 +3,6 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "DrawDebugHelpers.h"
-#include "Character/MainCharacter.h"
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()

@@ -32,10 +32,10 @@ private:
 	void PerformLineTrace();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
-	float MaxRange = 10000.0f;
+	float MaxRange = 20000.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
-	float Damage = 20.0f;
+	float Damage = 1.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	int32 MaxAmmo = 30;
