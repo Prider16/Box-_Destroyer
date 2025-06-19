@@ -17,8 +17,11 @@ public class Box_Destroyer : ModuleRules
 			"AIModule",
 			"StateTreeModule",
 			"GameplayStateTreeModule",
-			"UMG"
-		});
+			"UMG",
+            "Json",
+			"JsonUtilities",
+			"HTTP"
+        });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 

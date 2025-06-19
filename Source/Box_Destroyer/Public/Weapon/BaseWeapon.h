@@ -19,27 +19,35 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
+	// Firing Variable
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Variables)
 	bool Firing = false;
 
+	// Fire Function for Shoot
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
+	// Reload Function
 	UFUNCTION(BlueprintCallable)
 	void Reload();
 
 private:
+	// Function to setup code for Line trace and to apply Damage
 	void PerformLineTrace();
 
+	// Max range of linetrace
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	float MaxRange = 20000.0f;
 
+	// Damage that will be applied to other
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	float Damage = 1.0f;
 
+	// Maximum Ammo
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	int32 MaxAmmo = 30;
 
+	// Current Ammo
 	UPROPERTY(VisibleAnywhere, Category = "Weapon")
 	int32 CurrentAmmo;
 };
