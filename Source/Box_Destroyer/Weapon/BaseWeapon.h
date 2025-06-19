@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -10,17 +9,34 @@ UCLASS()
 class BOX_DESTROYER_API ABaseWeapon : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
+
+public:
 	ABaseWeapon();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
+public:
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
+	UFUNCTION(BlueprintCallable)
+	void Reload();
+
+private:
+	void PerformLineTrace();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	float MaxRange = 10000.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	float Damage = 20.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	int32 MaxAmmo = 30;
+
+	UPROPERTY(VisibleAnywhere, Category = "Weapon")
+	int32 CurrentAmmo;
 };

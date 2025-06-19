@@ -3,3 +3,7 @@
 
 #include "Character/MainCharacterGameMode.h"
 
+AMainCharacterGameMode::AMainCharacterGameMode()
+{
+	// Body
+}
