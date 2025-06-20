@@ -4,6 +4,7 @@
 #include "Engine/World.h"
 #include "Json.h"
 #include "JsonUtilities.h"
+#include "Boxes/BaseBox.h"
 
 ABoxSpawnActor::ABoxSpawnActor()
 {
@@ -181,7 +182,7 @@ void ABoxSpawnActor::SpawnAllBoxes()
 		const FBoxType* TypeData = BoxTypeMap.Find(Obj.Type);
 		if (!TypeData) continue;
 
-		AActor* SpawnedBox = GetWorld()->SpawnActor<AActor>(BoxToSpawn, Obj.Transform);
+		ABaseBox* SpawnedBox = GetWorld()->SpawnActor<ABaseBox>(BoxToSpawn, Obj.Transform);
 		UE_LOG(LogTemp, Warning, TEXT("[BoxSpawner] spawn box actor."));
 		if (!SpawnedBox)
 		{
@@ -199,5 +200,27 @@ void ABoxSpawnActor::SpawnAllBoxes()
 			}
 		}
 
+		int32 boxscore = TypeData->Score;
+		if (!boxscore)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[BoxSpawner] Failed to get box actor Score."));
+			continue;
+		}
+		else
+		{
+			SpawnedBox->ScoreSetter(boxscore);
+		}
+		
+
+		float Boxhealth = TypeData->Health;
+		if (!Boxhealth)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[BoxSpawner] Failed to get box actor Health."));
+			continue;
+		}
+		else
+		{
+			SpawnedBox->HealthSetter(Boxhealth);
+		}
 	}
 }

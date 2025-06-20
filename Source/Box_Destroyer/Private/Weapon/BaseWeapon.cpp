@@ -3,6 +3,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "DrawDebugHelpers.h"
+#include "Boxes/BaseBox.h"
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()
@@ -80,12 +81,35 @@ void ABaseWeapon::PerformLineTrace()
 		AActor* HitActor = Hit.GetActor();
 		if (HitActor)
 		{
-			//Apply damage to hit Actor.
-			UGameplayStatics::ApplyPointDamage(HitActor, Damage, Rotation.Vector(), Hit, PlayerController, this, nullptr);
-			UE_LOG(LogTemp, Log, TEXT("Hit %s for %f damage"), *HitActor->GetName(), Damage);
+
+			ABaseBox* HitBox = Cast<ABaseBox>(HitActor);
+			if (HitBox)
+			{
+				HitBox->DamageBox(Damage);
+				UE_LOG(LogTemp, Log, TEXT("Hit %s for %f damage"), *HitBox->GetName(), Damage);
+
+				if (HitBox->HealthGetter() <= 0.f)
+				{
+					Score += HitBox->ScoreGetter();
+				}
+			}
+			else
+			{
+				UE_LOG(LogTemp, Log, TEXT("Hit %s "), *HitActor->GetName());
+			}
 		}
 	}
 
 	// Debug line
 	DrawDebugLine(GetWorld(), Location, End, FColor::Red, false, 2.0f, 0, 1.0f);
+}
+
+void ABaseWeapon::ScoreSetter(int32 value)
+{
+	Score = value;
+}
+
+int32 ABaseWeapon::ScoreGetter()
+{
+	return Score;
 }

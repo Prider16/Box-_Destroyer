@@ -3,6 +3,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Boxes/BaseBox.h"
 #include "BaseWeapon.generated.h"
 
 UCLASS()
@@ -31,6 +32,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Reload();
 
+	// Setter Getter for Score
+	void ScoreSetter(int32 value);
+	int32 ScoreGetter();
+
 private:
 	// Function to setup code for Line trace and to apply Damage
 	void PerformLineTrace();
@@ -50,4 +55,8 @@ private:
 	// Current Ammo
 	UPROPERTY(VisibleAnywhere, Category = "Weapon")
 	int32 CurrentAmmo;
+
+	UPROPERTY(VisibleAnywhere, Category = "Variable")
+	int32 Score = 0;
+
 };

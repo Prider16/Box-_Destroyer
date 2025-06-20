@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Http.h"
+#include "Boxes/BaseBox.h"
 #include "BoxSpawnActor.generated.h"
 
 USTRUCT()
@@ -70,5 +71,5 @@ private:
 
 	// Blueprint box to spawn
 	UPROPERTY(EditAnywhere, Category = "Spawning")
-	TSubclassOf<AActor> BoxToSpawn;
+	TSubclassOf<ABaseBox> BoxToSpawn;
 };

@@ -149,7 +149,9 @@ void AMainCharacter::StopSprint(const FInputActionValue& Value)
 void AMainCharacter::Shoot(const FInputActionValue& Value)
 {
 	// Calling Fire Function from Rifle
+	UE_LOG(LogTemp, Warning, TEXT("Score %d "), RifleRefrence->ScoreGetter());
 	RifleRefrence->Fire();
+	
 }
 
 void AMainCharacter::Reload(const FInputActionValue& Value)
