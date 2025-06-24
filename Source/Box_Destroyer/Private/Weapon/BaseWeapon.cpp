@@ -12,6 +12,26 @@
 ABaseWeapon::ABaseWeapon()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	// create the root
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+
+	// create the first person mesh
+	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("First Person Mesh"));
+	FirstPersonMesh->SetupAttachment(RootComponent);
+
+	FirstPersonMesh->SetCollisionProfileName(FName("NoCollision"));
+	FirstPersonMesh->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::FirstPerson);
+	FirstPersonMesh->bOnlyOwnerSee = true;
+
+	// create the third person mesh
+	ThirdPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Third Person Mesh"));
+	ThirdPersonMesh->SetupAttachment(RootComponent);
+
+	ThirdPersonMesh->SetCollisionProfileName(FName("NoCollision"));
+	ThirdPersonMesh->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::WorldSpaceRepresentation);
+	ThirdPersonMesh->bOwnerNoSee = true;
+
 	CurrentAmmo = MaxAmmo;
 }
 

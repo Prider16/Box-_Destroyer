@@ -157,7 +157,7 @@ void AMainCharacter::StopSprint(const FInputActionValue& Value)
 {
 	// Setting Speed Back to normal after Sprint
 	isSprint = false;
-	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 }
 
 void AMainCharacter::Shoot(const FInputActionValue& Value)
@@ -197,9 +197,11 @@ void AMainCharacter::SpawnRifle()
 	// if the Rifle is spawned...
 	if (SpawnedRifle)
 	{
-		FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
+		FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, false);
 
 		//... Attaching it to the component
+		//SpawnedRifle->GetThirdPersonMesh()->AttachToComponent(GetMesh(), AttachmentRules, TEXT("HandGrip_R"));
+		//SpawnedRifle->GetFirstPersonMesh()->AttachToComponent(FirstPersonMesh, AttachmentRules, TEXT("HandGrip_R"));
 		SpawnedRifle->AttachToComponent(GetMesh(), AttachmentRules, TEXT("HandGrip_R"));
 		SpawnedRifle->AttachToComponent(FirstPersonMesh, AttachmentRules, TEXT("HandGrip_R"));
 	}

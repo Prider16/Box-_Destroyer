@@ -7,10 +7,20 @@
 #include "Boxes/BaseBox.h"
 #include "BaseWeapon.generated.h"
 
+class USkeletalMeshComponent;
+
 UCLASS()
 class BOX_DESTROYER_API ABaseWeapon : public AActor
 {
 	GENERATED_BODY()
+
+	/** First person perspective mesh */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USkeletalMeshComponent* FirstPersonMesh;
+
+	/** Third person perspective mesh */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USkeletalMeshComponent* ThirdPersonMesh;
 
 public:
 	// Called at the Beginning
@@ -43,6 +53,15 @@ public:
 	// Ammo Getter for Score
 	void AmmoSetter(int32 value);
 	int32 AmmoGetter();
+
+	/** Returns the first person mesh */
+	UFUNCTION(BlueprintPure, Category = "Weapon")
+	USkeletalMeshComponent* GetFirstPersonMesh() const { return FirstPersonMesh; };
+
+	/** Returns the third person mesh */
+	UFUNCTION(BlueprintPure, Category = "Weapon")
+	USkeletalMeshComponent* GetThirdPersonMesh() const { return ThirdPersonMesh; };
+
 
 private:
 	// Function to setup code for Line trace and to apply Damage
