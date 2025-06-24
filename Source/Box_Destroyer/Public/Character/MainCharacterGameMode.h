@@ -14,4 +14,7 @@ class BOX_DESTROYER_API AMainCharacterGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	AMainCharacterGameMode();
+
 };

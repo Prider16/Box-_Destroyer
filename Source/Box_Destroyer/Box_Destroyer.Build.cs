@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using UnrealBuildTool.Rules;
 
 public class Box_Destroyer : ModuleRules
 {
@@ -17,8 +18,11 @@ public class Box_Destroyer : ModuleRules
 			"AIModule",
 			"StateTreeModule",
 			"GameplayStateTreeModule",
-			"UMG"
-		});
+			"UMG",
+            "Json",
+            "JsonUtilities",
+            "HTTP"
+        });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
